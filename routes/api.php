@@ -12,12 +12,11 @@ use App\Http\Controllers\PeminjamanController;
 //login - register
 Route::post('/register',[UserController::class,'register']);
 Route::post('/login', [UserController::class,'login']);
+Route::post('/me', [UserController::class,'getAuthenticatedUser']);
 
 Route::group(['middleware' => ['jwt.verify']], function () 
 {
     
-});
-
 
 // api siswa
 Route::get('/siswa', [siswaController::class, 'getSiswa']);
@@ -56,3 +55,5 @@ Route::get('/jumlahdenda', [peminjamanController::class,'jumlahDenda']);
 Route::get('/jumlahkelas', [kelasController::class,'jumlahKelas']);
 Route::get('/jumlahpeminjaman', [peminjamanController::class,'jumlahPeminjaman']);
 Route::get('/jumlahbukubelumkembali', [peminjamanController::class,'jumlahBukuBelumKembali']);
+
+});

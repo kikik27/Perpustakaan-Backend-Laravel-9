@@ -45,12 +45,12 @@ class siswaController extends Controller
         if($validator->fails()) {
             return Response()->json([
                 'status'=>'error',
-                'message'=>$validator->errors()
+                'message'=>$validator->errors()->toJson()
             ]);
         }
 
         $save = siswa::create([
-        'id_kelas'      =>$req->get('id_kelas'),
+            'id_kelas'      =>$req->get('id_kelas'),
            'nama_siswa'    =>$req->get('nama_siswa'),
            'tanggal_lahir' =>$req->get('tanggal_lahir'),
            'gender'        =>$req->get('gender'),
@@ -99,7 +99,7 @@ class siswaController extends Controller
 
     public function deleteSiswa($id_siswa){
     
-    $hapus = Siswa::where('id_siswa',$id_siswa)->delete();
+    $hapus  = Siswa::where('id_siswa',$id_siswa)->delete();
     if($hapus){
         return Response()->json(['status'=>'success','message'=>'Sukses Hapus Siswa']);
     }else{
